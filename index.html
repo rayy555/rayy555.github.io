@@ -365,19 +365,22 @@
       </div>
     </div>
 
-    <!-- 實驗結報：
-         HTML 筆記用 data-page="./notes/檔名.html"，右側直接顯示內容
-         PDF 用 data-pdf="./reports/檔名.pdf"，右側嵌入 PDF -->
+    <!-- 實驗結報 PDF -->
     <div class="category">
       <div class="category-header" onclick="toggleCategory(this)">
         <span class="category-name">物理實驗結報</span>
-        <span class="category-count">1</span>
+        <span class="category-count">4</span>
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" data-page="./notes/main.html"
-           onclick="openPage(event, this, '麥克森干涉實驗')">麥克森干涉實驗</a>
-        <!-- 之後新增結報複製上面這行，HTML 用 data-page，PDF 用 data-pdf -->
+        <a class="note-link" data-pdf="./reports/physics_lab_3_.pdf"
+           onclick="openPDF(event, this, '麥克森干涉實驗')">麥克森干涉實驗</a>
+        <a class="note-link" data-pdf="./reports/physics_lab_4_(1).pdf"
+           onclick="openPDF(event, this, '實驗四')">實驗四</a>
+        <a class="note-link" data-pdf="./reports/physics_lab_5_.pdf"
+           onclick="openPDF(event, this, '實驗五')">實驗五</a>
+        <a class="note-link" data-pdf="./reports/physics_lab_final_.pdf"
+           onclick="openPDF(event, this, '期末實驗')">期末實驗</a>
       </div>
     </div>
 
@@ -484,18 +487,33 @@
     document.getElementById('open-tab-btn').href = url;
     document.getElementById('fallback-link').href = url;
 
-    document.getElementById('note-body').style.display = 'none';
-    document.getElementById('fallback-msg').style.display = 'none';
-
+    const noteBody = document.getElementById('note-body');
     const iframe = document.getElementById('pdf-iframe');
-    iframe.src = url;
-    iframe.style.display = 'block';
+    const fallback = document.getElementById('fallback-msg');
+
+    iframe.style.display = 'none';
+    fallback.style.display = 'none';
+    noteBody.style.display = 'block';
+    noteBody.innerHTML = '<p style="color:#aaa;font-size:13px;padding:48px 64px;">載入中…</p>';
 
     document.getElementById('cv-view').style.display = 'none';
     document.getElementById('content-view').style.display = 'flex';
-}
 
-  
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('not found');
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const body = doc.querySelector('body');
+      noteBody.innerHTML = body ? body.innerHTML : html;
+      if (window.MathJax) MathJax.typesetPromise([noteBody]);
+    } catch(e) {
+      noteBody.style.display = 'none';
+      fallback.style.display = 'flex';
+    }
+  }
+
   // 開啟 PDF（右側嵌入）
   function openPDF(event, el, title) {
     event.preventDefault();
