@@ -488,29 +488,14 @@
     const iframe = document.getElementById('pdf-iframe');
     const fallback = document.getElementById('fallback-msg');
 
-    iframe.style.display = 'none';
+    noteBody.style.display = 'none';
     fallback.style.display = 'none';
-    noteBody.style.display = 'block';
-    noteBody.innerHTML = '<p style="color:#aaa;font-size:13px;padding:48px 64px;">載入中…</p>';
+    iframe.src = url;
+    iframe.style.display = 'block';
 
     document.getElementById('cv-view').style.display = 'none';
     document.getElementById('content-view').style.display = 'flex';
-
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('not found');
-      const html = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const body = doc.querySelector('body');
-      noteBody.innerHTML = body ? body.innerHTML : html;
-      if (window.MathJax) MathJax.typesetPromise([noteBody]);
-    } catch(e) {
-      noteBody.style.display = 'none';
-      fallback.style.display = 'flex';
-    }
-  }
-
+}
   // 開啟 PDF（右側嵌入）
   function openPDF(event, el, title) {
     event.preventDefault();
