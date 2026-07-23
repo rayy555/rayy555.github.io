@@ -484,18 +484,18 @@
     document.getElementById('open-tab-btn').href = url;
     document.getElementById('fallback-link').href = url;
 
-    const noteBody = document.getElementById('note-body');
-    const iframe = document.getElementById('pdf-iframe');
-    const fallback = document.getElementById('fallback-msg');
+    document.getElementById('note-body').style.display = 'none';
+    document.getElementById('fallback-msg').style.display = 'none';
 
-    noteBody.style.display = 'none';
-    fallback.style.display = 'none';
+    const iframe = document.getElementById('pdf-iframe');
     iframe.src = url;
     iframe.style.display = 'block';
 
     document.getElementById('cv-view').style.display = 'none';
     document.getElementById('content-view').style.display = 'flex';
 }
+
+  
   // 開啟 PDF（右側嵌入）
   function openPDF(event, el, title) {
     event.preventDefault();
