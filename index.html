@@ -400,12 +400,106 @@
     .contact-item:hover { color: var(--blue); border-color: var(--accent); background: var(--blue-light); }
     .contact-label { font-weight: 600; color: var(--blue); font-size: 11px; min-width: 48px; text-transform: uppercase; letter-spacing: 0.5px; }
 
+    /* ── CV 雙欄版面 ── */
+    .cv-layout {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .cv-left { flex: 1; min-width: 0; }
+
+    .cv-right {
+      width: 260px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 圖片卡 */
+    .photo-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(26,58,107,0.07);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .photo-caption {
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: #fafbfd;
+      letter-spacing: 0.3px;
+    }
+
+    /* 名言卡 */
+    .quotes-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(26,58,107,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .quotes-card-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quote-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .quote-text {
+      font-size: 12.5px;
+      color: #444;
+      line-height: 1.75;
+      font-style: italic;
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    .quote-author {
+      font-size: 11px;
+      color: var(--blue-mid);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    @media (max-width: 1100px) {
+      .cv-right { width: 220px; }
+    }
+
     @media (max-width: 860px) {
       .main-layout { flex-direction: column; overflow: auto; height: auto; }
       .left-panel { width: 100%; height: auto; min-width: unset; }
       .notes-list { max-height: 40vh; }
       #cv-view { padding: 24px 16px; }
       .cv-card { padding: 24px 20px; }
+      .cv-layout { flex-direction: column; }
+      .cv-right { width: 100%; }
     }
   </style>
 </head>
@@ -525,6 +619,8 @@
 
   <!-- CV 檢視（預設顯示） -->
   <div id="cv-view">
+    <div class="cv-layout">
+    <div class="cv-left">
     <div class="cv-card">
       <div class="profile-header">
         <div class="profile-avatar">R</div>
@@ -589,7 +685,55 @@
           <span class="contact-label">GitHub</span> github.com/rayy555
         </a>
       </div>
-    </div>
+    </div><!-- end cv-card -->
+    </div><!-- end cv-left -->
+
+    <!-- 右欄 -->
+    <div class="cv-right">
+
+      <!-- 上方：圖片區（可替換成任何照片） -->
+      <div class="photo-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/N.Tesla.JPG/400px-N.Tesla.JPG"
+             alt="Nikola Tesla" />
+        <div class="photo-caption">Nikola Tesla &nbsp;|&nbsp; 1856 – 1943</div>
+      </div>
+
+      <!-- 下方：物理學家名言 -->
+      <div class="quotes-card">
+        <div class="quotes-card-title">物理學家語錄</div>
+
+        <div class="quote-item">
+          <div class="quote-text">
+            "If you want to find the secrets of the universe, think in terms of energy, frequency and vibration."
+          </div>
+          <div class="quote-author">— Nikola Tesla</div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">
+            "The future will show whether my foresight is as accurate now as it has proved heretofore."
+          </div>
+          <div class="quote-author">— Nikola Tesla</div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">
+            "The special theory of relativity owes its origins to Maxwell's equations of the electromagnetic field."
+          </div>
+          <div class="quote-author">— Albert Einstein（論馬克士威）</div>
+        </div>
+
+        <div class="quote-item">
+          <div class="quote-text">
+            "From a long view of the history of mankind, the most significant event of the 19th century will be judged as Maxwell's discovery of the laws of electrodynamics."
+          </div>
+          <div class="quote-author">— Richard Feynman（論馬克士威）</div>
+        </div>
+
+      </div><!-- end quotes-card -->
+
+    </div><!-- end cv-right -->
+    </div><!-- end cv-layout -->
   </div>
 
   <!-- 筆記 / PDF 檢視 -->
