@@ -30,22 +30,37 @@
     }
 
     .left-header {
-      padding: 28px 22px 16px;
+      padding: 24px 22px 14px;
       border-bottom: 1px solid #e5e5e5;
     }
 
-    .left-header h1 {
+    /* 首頁按鈕 */
+    .home-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+      width: 100%;
+      text-align: left;
+    }
+
+    .home-btn h1 {
       font-size: 15px;
       font-weight: 600;
       color: #1a1a1a;
-      letter-spacing: 0.2px;
     }
 
-    .left-header p {
+    .home-btn p {
       font-size: 12px;
       color: #999;
-      margin-top: 3px;
+      margin-top: 2px;
     }
+
+    .home-btn:hover h1 { color: #555; }
 
     .search-box {
       padding: 12px 16px;
@@ -79,7 +94,6 @@
     .notes-list::-webkit-scrollbar { width: 4px; }
     .notes-list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
 
-    /* Category */
     .category { margin-bottom: 2px; }
 
     .category-header {
@@ -101,10 +115,7 @@
       color: #333;
     }
 
-    .category-count {
-      font-size: 11px;
-      color: #bbb;
-    }
+    .category-count { font-size: 11px; color: #bbb; }
 
     .category-arrow {
       font-size: 9px;
@@ -113,7 +124,6 @@
     }
 
     .category.open .category-arrow { transform: rotate(90deg); }
-
     .category-items { display: none; }
     .category.open .category-items { display: block; }
 
@@ -126,9 +136,12 @@
       transition: background 0.1s, color 0.1s;
       border-left: 2px solid transparent;
       margin-left: 20px;
+      cursor: pointer;
     }
 
-    .note-link:hover {
+    .note-link:hover { background: #f0f0f0; color: #1a1a1a; }
+
+    .note-link.active {
       background: #f0f0f0;
       color: #1a1a1a;
       border-left-color: #1a1a1a;
@@ -137,6 +150,14 @@
     /* ── RIGHT PANEL ── */
     .right-panel {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* CV 檢視 */
+    #cv-view {
+      flex: 1;
       overflow-y: auto;
       padding: 52px 64px;
       scrollbar-width: thin;
@@ -144,131 +165,120 @@
       max-width: 720px;
     }
 
-    .right-panel::-webkit-scrollbar { width: 6px; }
-    .right-panel::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+    #cv-view::-webkit-scrollbar { width: 6px; }
+    #cv-view::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
 
-    /* Profile */
-    .profile-name {
-      font-size: 28px;
-      font-weight: 700;
-      color: #1a1a1a;
-      letter-spacing: -0.5px;
-    }
-
-    .profile-subtitle {
-      font-size: 14px;
-      color: #666;
-      margin-top: 6px;
-    }
-
-    .profile-bio {
-      font-size: 14px;
-      color: #555;
-      margin-top: 14px;
-      line-height: 1.8;
-      max-width: 520px;
-    }
-
-    /* Section */
-    .divider {
-      border: none;
-      border-top: 1px solid #e5e5e5;
-      margin: 36px 0;
-    }
-
-    .section-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 18px;
-    }
-
-    /* Entry rows */
-    .entry {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 22px;
-    }
-
-    .entry-date {
-      font-size: 12px;
-      color: #aaa;
-      white-space: nowrap;
-      padding-top: 2px;
-      min-width: 90px;
-    }
-
-    .entry-body {}
-
-    .entry-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1a1a1a;
-    }
-
-    .entry-sub {
-      font-size: 13px;
-      color: #666;
-      margin-top: 2px;
-    }
-
-    .entry-desc {
-      font-size: 13px;
-      color: #888;
-      margin-top: 5px;
-      line-height: 1.7;
-    }
-
-    /* Skills */
-    .skills-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .skill-tag {
-      font-size: 12px;
-      color: #444;
-      background: #f3f3f3;
-      border: 1px solid #e0e0e0;
-      padding: 4px 12px;
-      border-radius: 4px;
-    }
-
-    /* Contact */
-    .contact-row {
-      display: flex;
+    /* PDF 檢視 */
+    #content-view {
+      flex: 1;
+      display: none;
       flex-direction: column;
-      gap: 8px;
+      overflow: hidden;
     }
 
-    .contact-item {
+    .viewer-topbar {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: #555;
-      text-decoration: none;
+      gap: 12px;
+      padding: 10px 20px;
+      border-bottom: 1px solid #e5e5e5;
+      background: #fafafa;
+      flex-shrink: 0;
+    }
+
+    .back-btn {
+      font-size: 12px;
+      color: #888;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
       transition: color 0.15s;
     }
 
-    .contact-item:hover { color: #1a1a1a; }
+    .back-btn:hover { color: #1a1a1a; }
 
-    .contact-label {
+    .viewer-title {
+      font-size: 13px;
       font-weight: 500;
-      color: #aaa;
-      font-size: 12px;
-      min-width: 55px;
+      color: #333;
+      flex: 1;
     }
 
-    /* Responsive */
+    .open-tab-btn {
+      font-size: 12px;
+      color: #888;
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: all 0.15s;
+    }
+
+    .open-tab-btn:hover { color: #1a1a1a; border-color: #aaa; }
+
+    #pdf-iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+      background: #f5f5f5;
+    }
+
+    /* 無法嵌入的提示 */
+    #fallback-msg {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    #fallback-msg a {
+      font-size: 13px;
+      color: #1a1a1a;
+      border: 1px solid #ddd;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    #fallback-msg a:hover { background: #f5f5f5; }
+
+    /* ── CV 樣式 ── */
+    .profile-name { font-size: 28px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.5px; }
+    .profile-subtitle { font-size: 14px; color: #666; margin-top: 6px; }
+    .profile-bio { font-size: 14px; color: #555; margin-top: 14px; line-height: 1.8; max-width: 520px; }
+    .divider { border: none; border-top: 1px solid #e5e5e5; margin: 36px 0; }
+    .section-title { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 18px; }
+
+    .entry { display: flex; gap: 20px; margin-bottom: 22px; }
+    .entry-date { font-size: 12px; color: #aaa; white-space: nowrap; padding-top: 2px; min-width: 90px; }
+    .entry-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+    .entry-sub { font-size: 13px; color: #666; margin-top: 2px; }
+    .entry-desc { font-size: 13px; color: #888; margin-top: 5px; line-height: 1.7; }
+
+    .skills-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag { font-size: 12px; color: #444; background: #f3f3f3; border: 1px solid #e0e0e0; padding: 4px 12px; border-radius: 4px; }
+
+    .contact-row { display: flex; flex-direction: column; gap: 8px; }
+    .contact-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #555; text-decoration: none; transition: color 0.15s; }
+    .contact-item:hover { color: #1a1a1a; }
+    .contact-label { font-weight: 500; color: #aaa; font-size: 12px; min-width: 55px; }
+
     @media (max-width: 860px) {
       body { flex-direction: column; overflow: auto; height: auto; }
       .left-panel { width: 100%; height: auto; min-width: unset; }
-      .notes-list { max-height: 45vh; }
-      .right-panel { padding: 32px 24px; }
+      .notes-list { max-height: 40vh; }
+      #cv-view { padding: 32px 24px; }
     }
   </style>
 </head>
@@ -277,17 +287,21 @@
 <!-- ───── LEFT: 筆記導覽 ───── -->
 <aside class="left-panel">
   <div class="left-header">
-    <h1>物理筆記</h1>
-    <p>點選分類展開</p>
+    <button class="home-btn" onclick="showCV()">
+      <div>
+        <h1>物理筆記</h1>
+        <p>點選可回到個人頁面</p>
+      </div>
+    </button>
   </div>
 
   <div class="search-box">
-    <input type="text" placeholder="搜尋…" id="searchInput" oninput="filterNotes(this.value)" />
+    <input type="text" placeholder="搜尋…" oninput="filterNotes(this.value)" />
   </div>
 
-  <nav class="notes-list" id="notesList">
+  <nav class="notes-list">
 
-    <!-- ★ 新增分類：複製一整個 .category 區塊 ★ -->
+    <!-- ★ 一般筆記：href 放連結，點了會開新分頁 ★ -->
 
     <div class="category open" data-default-open="1">
       <div class="category-header" onclick="toggleCategory(this)">
@@ -296,11 +310,10 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <!-- ★ 把 href="#" 換成你的筆記連結 ★ -->
-        <a class="note-link" href="#">牛頓三大運動定律</a>
-        <a class="note-link" href="#">功與能量守恆</a>
-        <a class="note-link" href="#">圓周運動與向心力</a>
-        <a class="note-link" href="#">簡諧運動</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '牛頓三大運動定律')">牛頓三大運動定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '功與能量守恆')">功與能量守恆</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '圓周運動與向心力')">圓周運動與向心力</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '簡諧運動')">簡諧運動</a>
       </div>
     </div>
 
@@ -311,10 +324,10 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#">庫倫定律與電場</a>
-        <a class="note-link" href="#">高斯定律</a>
-        <a class="note-link" href="#">磁場與安培定律</a>
-        <a class="note-link" href="#">馬克士威方程組</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '庫倫定律與電場')">庫倫定律與電場</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '高斯定律')">高斯定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '磁場與安培定律')">磁場與安培定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '馬克士威方程組')">馬克士威方程組</a>
       </div>
     </div>
 
@@ -325,9 +338,9 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#">熱力學第一定律</a>
-        <a class="note-link" href="#">熱力學第二定律與熵</a>
-        <a class="note-link" href="#">卡諾循環</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '熱力學第一定律')">熱力學第一定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '熱力學第二定律與熵')">熱力學第二定律與熵</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '卡諾循環')">卡諾循環</a>
       </div>
     </div>
 
@@ -338,9 +351,9 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#">薛丁格方程式</a>
-        <a class="note-link" href="#">波函數與測量</a>
-        <a class="note-link" href="#">氫原子模型</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '薛丁格方程式')">薛丁格方程式</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '波函數與測量')">波函數與測量</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '氫原子模型')">氫原子模型</a>
       </div>
     </div>
 
@@ -351,96 +364,176 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#">波的干涉與繞射</a>
-        <a class="note-link" href="#">幾何光學</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '波的干涉與繞射')">波的干涉與繞射</a>
+        <a class="note-link" href="#" onclick="openLink(event, this, '幾何光學')">幾何光學</a>
+      </div>
+    </div>
+
+    <!-- ★ 實驗結報：data-pdf 放你的 PDF 網址，右側直接預覽 ★ -->
+    <div class="category">
+      <div class="category-header" onclick="toggleCategory(this)">
+        <span class="category-name">物理實驗結報</span>
+        <span class="category-count">3</span>  <!-- ← 改成你的結報數量 -->
+        <span class="category-arrow">▶</span>
+      </div>
+      <div class="category-items">
+        <!--
+          data-pdf 填你的 PDF 網址，有兩種來源：
+          1. 上傳到 GitHub：./reports/lab1.pdf
+          2. Google Drive：先取得共享連結，格式改成
+             https://drive.google.com/file/d/你的ID/preview
+        -->
+        <a class="note-link" data-pdf="./reports/lab1.pdf"
+           onclick="openPDF(event, this, '實驗一：自由落體')">實驗一：自由落體</a>
+        <a class="note-link" data-pdf="./reports/lab2.pdf"
+           onclick="openPDF(event, this, '實驗二：單擺運動')">實驗二：單擺運動</a>
+        <a class="note-link" data-pdf="./reports/lab3.pdf"
+           onclick="openPDF(event, this, '實驗三：歐姆定律')">實驗三：歐姆定律</a>
+        <!-- ★ 複製上面一行可以新增更多結報 ★ -->
       </div>
     </div>
 
   </nav>
 </aside>
 
-<!-- ───── RIGHT: 個人 CV ───── -->
+<!-- ───── RIGHT: 主內容區 ───── -->
 <main class="right-panel">
 
-  <!-- 基本資料 -->
-  <div class="profile-name">你的名字</div>  <!-- ← 換成你的名字 -->
-  <div class="profile-subtitle">物理學系・國立XX大學</div>  <!-- ← 換成你的身分 -->
-  <p class="profile-bio">
-    熱愛物理與數學，這個網站是我整理課程筆記的地方。
-    歡迎任何人瀏覽，如有問題歡迎聯絡我。
-  </p>  <!-- ← 換成你自己的介紹 -->
+  <!-- CV 檢視（預設顯示） -->
+  <div id="cv-view">
+    <div class="profile-name">你的名字</div>
+    <div class="profile-subtitle">物理學系・國立XX大學</div>
+    <p class="profile-bio">
+      熱愛物理與數學，這個網站是我整理課程筆記的地方。
+      歡迎任何人瀏覽，如有問題歡迎聯絡我。
+    </p>
 
-  <hr class="divider"/>
+    <hr class="divider"/>
+    <div class="section-title">學歷</div>
 
-  <!-- 學歷 -->
-  <div class="section-title">學歷</div>
+    <div class="entry">
+      <div class="entry-date">2022 — 現在</div>
+      <div class="entry-body">
+        <div class="entry-title">國立XX大學</div>
+        <div class="entry-sub">物理學系 學士</div>
+        <div class="entry-desc">主修理論物理，輔修數學。</div>
+      </div>
+    </div>
 
-  <!-- ★ 複製 .entry 區塊可以新增更多項目 ★ -->
-  <div class="entry">
-    <div class="entry-date">2022 — 現在</div>
-    <div class="entry-body">
-      <div class="entry-title">國立XX大學</div>
-      <div class="entry-sub">物理學系 學士</div>
-      <div class="entry-desc">主修理論物理，輔修數學。</div>
+    <div class="entry">
+      <div class="entry-date">2019 — 2022</div>
+      <div class="entry-body">
+        <div class="entry-title">XX高中</div>
+        <div class="entry-sub">自然組</div>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="section-title">研究 / 經歷</div>
+
+    <div class="entry">
+      <div class="entry-date">2023 夏</div>
+      <div class="entry-body">
+        <div class="entry-title">XX實驗室 研究助理</div>
+        <div class="entry-sub">指導教授：XX教授</div>
+        <div class="entry-desc">進行量子計算相關研究，負責模擬量子電路的穩定性。</div>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="section-title">技能</div>
+    <div class="skills-row">
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">LaTeX</span>
+      <span class="skill-tag">MATLAB</span>
+      <span class="skill-tag">數值模擬</span>
+      <span class="skill-tag">數據分析</span>
+    </div>
+
+    <hr class="divider"/>
+    <div class="section-title">聯絡</div>
+    <div class="contact-row">
+      <a class="contact-item" href="mailto:your@email.com">
+        <span class="contact-label">Email</span> your@email.com
+      </a>
+      <a class="contact-item" href="https://github.com/yourname" target="_blank">
+        <span class="contact-label">GitHub</span> github.com/yourname
+      </a>
     </div>
   </div>
 
-  <div class="entry">
-    <div class="entry-date">2019 — 2022</div>
-    <div class="entry-body">
-      <div class="entry-title">XX高中</div>
-      <div class="entry-sub">自然組</div>
+  <!-- PDF / 內容 檢視 -->
+  <div id="content-view">
+    <div class="viewer-topbar">
+      <button class="back-btn" onclick="showCV()">← 返回</button>
+      <span class="viewer-title" id="viewer-title"></span>
+      <a class="open-tab-btn" id="open-tab-btn" href="#" target="_blank">另開視窗</a>
     </div>
-  </div>
-
-  <hr class="divider"/>
-
-  <!-- 經歷 -->
-  <div class="section-title">研究 / 經歷</div>
-
-  <div class="entry">
-    <div class="entry-date">2023 夏</div>
-    <div class="entry-body">
-      <div class="entry-title">XX實驗室 研究助理</div>
-      <div class="entry-sub">指導教授：XX教授</div>
-      <div class="entry-desc">進行量子計算相關研究，負責模擬量子電路的穩定性。</div>
+    <iframe id="pdf-iframe" src="" allowfullscreen></iframe>
+    <div id="fallback-msg">
+      <span>此檔案無法在頁面內嵌入顯示</span>
+      <a id="fallback-link" href="#" target="_blank">點此開啟檔案</a>
     </div>
-  </div>
-
-  <hr class="divider"/>
-
-  <!-- 技能 -->
-  <div class="section-title">技能</div>
-  <div class="skills-row">
-    <!-- ★ 複製 .skill-tag 可以新增技能 ★ -->
-    <span class="skill-tag">Python</span>
-    <span class="skill-tag">LaTeX</span>
-    <span class="skill-tag">MATLAB</span>
-    <span class="skill-tag">數值模擬</span>
-    <span class="skill-tag">數據分析</span>
-    <span class="skill-tag">英文閱讀</span>
-  </div>
-
-  <hr class="divider"/>
-
-  <!-- 聯絡 -->
-  <div class="section-title">聯絡</div>
-  <div class="contact-row">
-    <a class="contact-item" href="mailto:your@email.com">  <!-- ← 換成你的 email -->
-      <span class="contact-label">Email</span> your@email.com
-    </a>
-    <a class="contact-item" href="https://github.com/yourname" target="_blank">  <!-- ← 換成你的 GitHub -->
-      <span class="contact-label">GitHub</span> github.com/yourname
-    </a>
   </div>
 
 </main>
 
 <script>
+  // 切換至 CV 頁
+  function showCV() {
+    document.getElementById('cv-view').style.display = '';
+    document.getElementById('content-view').style.display = 'none';
+    document.querySelectorAll('.note-link').forEach(l => l.classList.remove('active'));
+  }
+
+  // 開啟 PDF（右側嵌入）
+  function openPDF(event, el, title) {
+    event.preventDefault();
+    const url = el.dataset.pdf;
+    if (!url || url === '#') return;
+
+    setActive(el);
+    document.getElementById('viewer-title').textContent = title;
+    document.getElementById('open-tab-btn').href = url;
+    document.getElementById('fallback-link').href = url;
+
+    const iframe = document.getElementById('pdf-iframe');
+    iframe.src = url;
+    iframe.style.display = 'block';
+    document.getElementById('fallback-msg').style.display = 'none';
+
+    document.getElementById('cv-view').style.display = 'none';
+    document.getElementById('content-view').style.display = 'flex';
+
+    // 若 iframe 載入失敗（跨來源限制）顯示備援訊息
+    iframe.onerror = function() {
+      iframe.style.display = 'none';
+      document.getElementById('fallback-msg').style.display = 'flex';
+    };
+  }
+
+  // 開啟一般連結（外部連結新分頁）
+  function openLink(event, el, title) {
+    const href = el.getAttribute('href');
+    if (!href || href === '#') {
+      event.preventDefault();
+      return;
+    }
+    // 有真實連結就讓瀏覽器正常開新分頁
+  }
+
+  // 設定 active 樣式
+  function setActive(el) {
+    document.querySelectorAll('.note-link').forEach(l => l.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // 展開 / 收起分類
   function toggleCategory(header) {
     header.closest('.category').classList.toggle('open');
   }
 
+  // 搜尋
   function filterNotes(query) {
     const q = query.trim().toLowerCase();
     document.querySelectorAll('.category').forEach(cat => {
