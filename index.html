@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>我的物理筆記</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <!-- MathJax：讓數學公式正確顯示 -->
+  <script>
+    MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']] }, svg: { fontCache: 'global' } };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,7 +39,6 @@
       border-bottom: 1px solid #e5e5e5;
     }
 
-    /* 首頁按鈕 */
     .home-btn {
       display: flex;
       align-items: center;
@@ -48,18 +52,8 @@
       text-align: left;
     }
 
-    .home-btn h1 {
-      font-size: 15px;
-      font-weight: 600;
-      color: #1a1a1a;
-    }
-
-    .home-btn p {
-      font-size: 12px;
-      color: #999;
-      margin-top: 2px;
-    }
-
+    .home-btn h1 { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+    .home-btn p { font-size: 12px; color: #999; margin-top: 2px; }
     .home-btn:hover h1 { color: #555; }
 
     .search-box {
@@ -107,14 +101,7 @@
     }
 
     .category-header:hover { background: #f0f0f0; }
-
-    .category-name {
-      flex: 1;
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-    }
-
+    .category-name { flex: 1; font-size: 13px; font-weight: 600; color: #333; }
     .category-count { font-size: 11px; color: #bbb; }
 
     .category-arrow {
@@ -140,12 +127,7 @@
     }
 
     .note-link:hover { background: #f0f0f0; color: #1a1a1a; }
-
-    .note-link.active {
-      background: #f0f0f0;
-      color: #1a1a1a;
-      border-left-color: #1a1a1a;
-    }
+    .note-link.active { background: #f0f0f0; color: #1a1a1a; border-left-color: #1a1a1a; }
 
     /* ── RIGHT PANEL ── */
     .right-panel {
@@ -155,7 +137,6 @@
       overflow: hidden;
     }
 
-    /* CV 檢視 */
     #cv-view {
       flex: 1;
       overflow-y: auto;
@@ -168,7 +149,6 @@
     #cv-view::-webkit-scrollbar { width: 6px; }
     #cv-view::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
 
-    /* PDF 檢視 */
     #content-view {
       flex: 1;
       display: none;
@@ -201,13 +181,7 @@
     }
 
     .back-btn:hover { color: #1a1a1a; }
-
-    .viewer-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: #333;
-      flex: 1;
-    }
+    .viewer-title { font-size: 13px; font-weight: 500; color: #333; flex: 1; }
 
     .open-tab-btn {
       font-size: 12px;
@@ -229,7 +203,31 @@
       background: #f5f5f5;
     }
 
-    /* 無法嵌入的提示 */
+    /* HTML 筆記內容區 */
+    #note-body {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+      padding: 48px 64px;
+      scrollbar-width: thin;
+      scrollbar-color: #ddd transparent;
+    }
+
+    #note-body::-webkit-scrollbar { width: 6px; }
+    #note-body::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+    #note-body h1 { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: #1a1a1a; }
+    #note-body h2 { font-size: 17px; font-weight: 600; margin: 28px 0 12px; color: #1a1a1a; border-bottom: 1px solid #e5e5e5; padding-bottom: 6px; }
+    #note-body h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: #333; }
+    #note-body p  { font-size: 14px; line-height: 1.9; color: #444; margin-bottom: 14px; }
+    #note-body ul, #note-body ol { padding-left: 20px; margin-bottom: 14px; }
+    #note-body li { font-size: 14px; line-height: 1.8; color: #444; }
+    #note-body table { border-collapse: collapse; width: 100%; margin-bottom: 18px; font-size: 13px; }
+    #note-body th, #note-body td { border: 1px solid #e0e0e0; padding: 8px 12px; text-align: left; }
+    #note-body th { background: #f5f5f5; font-weight: 600; }
+    #note-body pre { background: #f5f5f5; border: 1px solid #e5e5e5; border-radius: 6px; padding: 14px; overflow-x: auto; font-size: 13px; margin-bottom: 14px; }
+    #note-body img { max-width: 100%; border-radius: 6px; margin: 10px 0; }
+
     #fallback-msg {
       display: none;
       flex: 1;
@@ -301,8 +299,6 @@
 
   <nav class="notes-list">
 
-    <!-- ★ 一般筆記：href 放連結，點了會開新分頁 ★ -->
-
     <div class="category open" data-default-open="1">
       <div class="category-header" onclick="toggleCategory(this)">
         <span class="category-name">力學</span>
@@ -310,10 +306,10 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#" onclick="openLink(event, this, '牛頓三大運動定律')">牛頓三大運動定律</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '功與能量守恆')">功與能量守恆</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '圓周運動與向心力')">圓周運動與向心力</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '簡諧運動')">簡諧運動</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">牛頓三大運動定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">功與能量守恆</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">圓周運動與向心力</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">簡諧運動</a>
       </div>
     </div>
 
@@ -324,10 +320,10 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#" onclick="openLink(event, this, '庫倫定律與電場')">庫倫定律與電場</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '高斯定律')">高斯定律</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '磁場與安培定律')">磁場與安培定律</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '馬克士威方程組')">馬克士威方程組</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">庫倫定律與電場</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">高斯定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">磁場與安培定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">馬克士威方程組</a>
       </div>
     </div>
 
@@ -338,9 +334,9 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#" onclick="openLink(event, this, '熱力學第一定律')">熱力學第一定律</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '熱力學第二定律與熵')">熱力學第二定律與熵</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '卡諾循環')">卡諾循環</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">熱力學第一定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">熱力學第二定律與熵</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">卡諾循環</a>
       </div>
     </div>
 
@@ -351,9 +347,9 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#" onclick="openLink(event, this, '薛丁格方程式')">薛丁格方程式</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '波函數與測量')">波函數與測量</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '氫原子模型')">氫原子模型</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">薛丁格方程式</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">波函數與測量</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">氫原子模型</a>
       </div>
     </div>
 
@@ -364,32 +360,24 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#" onclick="openLink(event, this, '波的干涉與繞射')">波的干涉與繞射</a>
-        <a class="note-link" href="#" onclick="openLink(event, this, '幾何光學')">幾何光學</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">波的干涉與繞射</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">幾何光學</a>
       </div>
     </div>
 
-    <!-- ★ 實驗結報：data-pdf 放你的 PDF 網址，右側直接預覽 ★ -->
+    <!-- 實驗結報：
+         HTML 筆記用 data-page="./notes/檔名.html"，右側直接顯示內容
+         PDF 用 data-pdf="./reports/檔名.pdf"，右側嵌入 PDF -->
     <div class="category">
       <div class="category-header" onclick="toggleCategory(this)">
         <span class="category-name">物理實驗結報</span>
-        <span class="category-count">3</span>  <!-- ← 改成你的結報數量 -->
+        <span class="category-count">1</span>
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <!--
-          data-pdf 填你的 PDF 網址，有兩種來源：
-          1. 上傳到 GitHub：./reports/lab1.pdf
-          2. Google Drive：先取得共享連結，格式改成
-             https://drive.google.com/file/d/你的ID/preview
-        -->
-        <a class="note-link" data-pdf="./reports/physics_lab_3_.pdf"
-           onclick="openPDF(event, this, '麥克森干涉實驗')">麥克森干涉實驗</a>
-        <a class="note-link" data-pdf="./reports/lab2.pdf"
-           onclick="openPDF(event, this, '實驗二：單擺運動')">實驗二：單擺運動</a>
-        <a class="note-link" data-pdf="./reports/lab3.pdf"
-           onclick="openPDF(event, this, '實驗三：歐姆定律')">實驗三：歐姆定律</a>
-        <!-- ★ 複製上面一行可以新增更多結報 ★ -->
+        <a class="note-link" data-page="./notes/main.html"
+           onclick="openPage(event, this, '麥克森干涉實驗')">麥克森干涉實驗</a>
+        <!-- 之後新增結報複製上面這行，HTML 用 data-page，PDF 用 data-pdf -->
       </div>
     </div>
 
@@ -401,8 +389,8 @@
 
   <!-- CV 檢視（預設顯示） -->
   <div id="cv-view">
-    <div class="profile-name">你的名字</div>
-    <div class="profile-subtitle">物理學系・國立XX大學</div>
+    <div class="profile-name">ray</div>
+    <div class="profile-subtitle">電子物理學系・國立陽明交通大學</div>
     <p class="profile-bio">
       熱愛物理與數學，這個網站是我整理課程筆記的地方。
       歡迎任何人瀏覽，如有問題歡迎聯絡我。
@@ -414,16 +402,16 @@
     <div class="entry">
       <div class="entry-date">2022 — 現在</div>
       <div class="entry-body">
-        <div class="entry-title">國立XX大學</div>
+        <div class="entry-title">國立陽明交通大學</div>
         <div class="entry-sub">物理學系 學士</div>
-        <div class="entry-desc">主修理論物理，輔修數學。</div>
+        <div class="entry-desc">主修物理。</div>
       </div>
     </div>
 
     <div class="entry">
       <div class="entry-date">2019 — 2022</div>
       <div class="entry-body">
-        <div class="entry-title">XX高中</div>
+        <div class="entry-title">彰化高中</div>
         <div class="entry-sub">自然組</div>
       </div>
     </div>
@@ -432,11 +420,10 @@
     <div class="section-title">研究 / 經歷</div>
 
     <div class="entry">
-      <div class="entry-date">2023 夏</div>
+      <div class="entry-date">2026 夏</div>
       <div class="entry-body">
-        <div class="entry-title">XX實驗室 研究助理</div>
-        <div class="entry-sub">指導教授：XX教授</div>
-        <div class="entry-desc">進行量子計算相關研究，負責模擬量子電路的穩定性。</div>
+        <div class="entry-title">低溫物理實驗室 專題生</div>
+        <div class="entry-sub">指導教授：葉勝玄教授</div>
       </div>
     </div>
 
@@ -453,25 +440,26 @@
     <hr class="divider"/>
     <div class="section-title">聯絡</div>
     <div class="contact-row">
-      <a class="contact-item" href="mailto:your@email.com">
-        <span class="contact-label">Email</span> your@email.com
+      <a class="contact-item" href="mailto:linraymond720@gmail.com">
+        <span class="contact-label">Email</span> linraymond720@gmail.com
       </a>
-      <a class="contact-item" href="https://github.com/yourname" target="_blank">
-        <span class="contact-label">GitHub</span> github.com/yourname
+      <a class="contact-item" href="https://github.com/rayy555" target="_blank">
+        <span class="contact-label">GitHub</span> github.com/rayy555
       </a>
     </div>
   </div>
 
-  <!-- PDF / 內容 檢視 -->
+  <!-- 筆記 / PDF 檢視 -->
   <div id="content-view">
     <div class="viewer-topbar">
       <button class="back-btn" onclick="showCV()">← 返回</button>
       <span class="viewer-title" id="viewer-title"></span>
       <a class="open-tab-btn" id="open-tab-btn" href="#" target="_blank">另開視窗</a>
     </div>
+    <div id="note-body"></div>
     <iframe id="pdf-iframe" src="" allowfullscreen></iframe>
     <div id="fallback-msg">
-      <span>此檔案無法在頁面內嵌入顯示</span>
+      <span>此檔案無法載入</span>
       <a id="fallback-link" href="#" target="_blank">點此開啟檔案</a>
     </div>
   </div>
@@ -479,11 +467,48 @@
 </main>
 
 <script>
-  // 切換至 CV 頁
   function showCV() {
     document.getElementById('cv-view').style.display = '';
     document.getElementById('content-view').style.display = 'none';
     document.querySelectorAll('.note-link').forEach(l => l.classList.remove('active'));
+  }
+
+  // 開啟 HTML 筆記（右側直接顯示內容）
+  async function openPage(event, el, title) {
+    event.preventDefault();
+    const url = el.dataset.page;
+    if (!url) return;
+
+    setActive(el);
+    document.getElementById('viewer-title').textContent = title;
+    document.getElementById('open-tab-btn').href = url;
+    document.getElementById('fallback-link').href = url;
+
+    const noteBody = document.getElementById('note-body');
+    const iframe = document.getElementById('pdf-iframe');
+    const fallback = document.getElementById('fallback-msg');
+
+    iframe.style.display = 'none';
+    fallback.style.display = 'none';
+    noteBody.style.display = 'block';
+    noteBody.innerHTML = '<p style="color:#aaa;font-size:13px;padding:48px 64px;">載入中…</p>';
+
+    document.getElementById('cv-view').style.display = 'none';
+    document.getElementById('content-view').style.display = 'flex';
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('not found');
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const body = doc.querySelector('body');
+      noteBody.innerHTML = body ? body.innerHTML : html;
+      if (window.MathJax) MathJax.typesetPromise([noteBody]);
+    } catch(e) {
+      noteBody.style.display = 'none';
+      fallback.style.display = 'flex';
+    }
   }
 
   // 開啟 PDF（右側嵌入）
@@ -498,42 +523,33 @@
     document.getElementById('fallback-link').href = url;
 
     const iframe = document.getElementById('pdf-iframe');
+    const noteBody = document.getElementById('note-body');
+    const fallback = document.getElementById('fallback-msg');
+
+    noteBody.style.display = 'none';
+    fallback.style.display = 'none';
     iframe.src = url;
     iframe.style.display = 'block';
-    document.getElementById('fallback-msg').style.display = 'none';
 
     document.getElementById('cv-view').style.display = 'none';
     document.getElementById('content-view').style.display = 'flex';
-
-    // 若 iframe 載入失敗（跨來源限制）顯示備援訊息
-    iframe.onerror = function() {
-      iframe.style.display = 'none';
-      document.getElementById('fallback-msg').style.display = 'flex';
-    };
   }
 
-  // 開啟一般連結（外部連結新分頁）
-  function openLink(event, el, title) {
+  // 一般連結（尚未設定時不跳轉）
+  function openLink(event, el) {
     const href = el.getAttribute('href');
-    if (!href || href === '#') {
-      event.preventDefault();
-      return;
-    }
-    // 有真實連結就讓瀏覽器正常開新分頁
+    if (!href || href === '#') event.preventDefault();
   }
 
-  // 設定 active 樣式
   function setActive(el) {
     document.querySelectorAll('.note-link').forEach(l => l.classList.remove('active'));
     el.classList.add('active');
   }
 
-  // 展開 / 收起分類
   function toggleCategory(header) {
     header.closest('.category').classList.toggle('open');
   }
 
-  // 搜尋
   function filterNotes(query) {
     const q = query.trim().toLowerCase();
     document.querySelectorAll('.category').forEach(cat => {
