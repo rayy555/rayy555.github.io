@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<div class="titlepage">
+<p><strong>物理實驗</strong><br />
+<strong>麥克森干涉</strong></p>
+<p>電物 17 113701005 林孟詮</p>
+<p>機械 14 110350074 楊淇鈞</p>
+<p>2026-07-23</p>
+<p><span>Department of Electrophysics<br />
+National Yang Ming Chiao Tung University</span></p>
+</div>
+<h1 id="實驗方法">實驗方法:</h1>
+<h2
+id="以麥克森干涉儀測量雷射光單頻波長-lambda">以麥克森干涉儀測量雷射光(單頻)波長
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></h2>
+<p>若以屏幕中心為觀察點，首先我們先移開擴束鏡，調整雷射光源與
+動鏡，使經由固定鏡M1與動鏡M2反射至屏幕的兩光點重合，再將擴束鏡夾在
+干涉儀前端。</p>
+<p>實驗裝置架設如下圖:</p>
+<figure id="fig:placeholder" data-latex-placement="h">
+<img src="./螢幕擷取畫面 2026-04-17 112117.png" style="width:50.0%" />
+<figcaption>麥克森干涉儀實驗裝置架設圖</figcaption>
+</figure>
+<ol>
+<li><p><strong>公式推演</strong>: 由於兩反射光到屏幕的光程差(d)為: <span
+class="math display">$$\begin{equation}
+                   2d = 2 \abs{L1-L2}
+\end{equation}$$</span> 我們知道要形成中心亮紋的條件是光程差
+(d)必須為波長的整數倍。亦即:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>d</mi><mo>=</mo><mi>n</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
+                    2d = n \lambda \label{eq:干涉條件}
+\end{equation}</annotation></semantics></math>
+藉由調整動鏡M2來變動d，兩次變動動鏡移動 之距離為
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\Delta d</annotation></semantics></math>，而在這期間中心
+亮紋變化之週期數為
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">\Delta n</annotation></semantics></math>
+，因此 由 <a href="#eq:干涉條件" data-reference-type="eqref"
+data-reference="eq:干涉條件">[eq:干涉條件]</a> 吾人可以得出 :
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><mrow><mi mathvariant="normal">Δ</mi><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\begin{equation}
+                    \lambda = \frac{2 \Delta d}{\Delta n} \label{實驗a}
+\end{equation}</annotation></semantics></math> 此實驗我們紀錄
+<strong>10</strong> 次變化週期。</p></li>
+</ol>
+<h2
+id="以麥克森干涉儀測量未知透明塊的折射率n">以麥克森干涉儀測量未知透明塊的折射率n</h2>
+<p>光在真空中的鄩進速度為
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+，但在介質(折射率
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">=n</annotation></semantics></math>
+)中其行進速度會變為
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mi>c</mi><mi>n</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">v = \dfrac{c}{n}</annotation></semantics></math>
+。 本實驗我們透過<strong>旋轉法</strong>，透過緩慢轉動 透明塊角度
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>
+，使得光在玻璃塊中走得路徑稍微變長，史的光程發生改變
+，進而使得干涉條紋發生移動。</p>
+<ol>
+<li><p><strong>公式推演</strong> :
+我們透過雷射光波長<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>、帶測物厚度
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>
+、轉動角度
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>
+與中心條紋移動數
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">\Delta m</annotation></semantics></math>，我們可
+已得出以下關係式:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mrow><mi mathvariant="normal">cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>t</mi><mo>−</mo><mi>λ</mi><mi mathvariant="normal">Δ</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mn>2</mn><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mrow><mi mathvariant="normal">cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>λ</mi><mi mathvariant="normal">Δ</mi><mi>m</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\begin{equation}
+                    n =  \frac{(1- \cos{\theta})(2t- \lambda \Delta m)}
+                              {2t(1-\cos{\theta})- \lambda \Delta m} \label{實驗b公式}
+\end{equation}</annotation></semantics></math></p></li>
+</ol>
+<p> </p>
+<h1 id="數據與圖表">數據與圖表</h1>
+<h2 id="雷射光波長測定">雷射光波長測定</h2>
+<figure id="實驗圖a" data-latex-placement="h">
+<img src="./干涉實驗數據.png" style="width:50.0%" />
+<figcaption><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>
+d vs.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>
+n 關係圖</figcaption>
+</figure>
+<div id="tab:placeholder">
+<table>
+<caption>data points</caption>
+<thead>
+<tr>
+<th
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">\Delta n</annotation></semantics></math></th>
+<th
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\Delta d</annotation></semantics></math>
+(nm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">400</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">600</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">800</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1200</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1600</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2000</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">2400</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">2800</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">3000</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p><strong>數據結果</strong> : 透過 <a href="#實驗圖a"
+data-reference-type="eqref"
+data-reference="實驗圖a">[實驗圖a]</a>線性回歸估算實際
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>值
+，由於斜率為:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mstyle displaystyle="true"><mfrac><mrow><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><mrow><mi mathvariant="normal">Δ</mi><mi>n</mi></mrow></mfrac></mstyle><annotation encoding="application/x-tex">\dfrac{\Delta d}{\Delta n}</annotation></semantics></math>
+，我 們可以知道
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mtext mathvariant="normal">實際</mtext></msub><mo>=</mo><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo>×</mo><mn>2</mn><mo>=</mo><mn>339.39</mn><mo>×</mo><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\begin{equation*}
+                     \lambda_{\text{實際}} = slope \times 2 = 339.39 \times 2 (nm)
+\end{equation*}</annotation></semantics></math> 已知
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mtext mathvariant="normal">理論</mtext></msub><mo>=</mo><mn>633</mn><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda_{\text{理論}} = 633(nm)</annotation></semantics></math>，我們可以得出:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Error</mtext><mo>=</mo><mn>7</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\begin{equation*}
+                    \text{Error} = 7  \%
+\end{equation*}</annotation></semantics></math></p></li>
+<li><p><strong>誤差分析</strong> :
+此誤差值略微偏大，吾人可將誤差來源分為以下幾個面向進行探討:</p>
+<h3 id="條紋計數判定錯誤">條紋計數判定錯誤</h3>
+<ul>
+<li><p><strong>What (誤差分類)</strong> : 人為誤差。</p></li>
+<li><p><strong>Why (如何造成)</strong> : 由於干涉條紋移動過快
+可能導致肉眼判定上 造成「多算」或「少算」的情況出現。</p></li>
+<li><p><strong>How (可以量化嗎)</strong> : 可以透過重複多次觀察來算平均
+波長藉此來評斷誤差值的離散程 度。</p></li>
+<li><p><strong>如何改進</strong> : 可以透過高禎率錄影協助。</p></li>
+</ul>
+<h3 id="微調螺絲之機械背隙">微調螺絲之機械背隙</h3>
+<ul>
+<li><p><strong>What (誤差分類)</strong> : 系統誤差。</p></li>
+<li><p><strong>Why (如何造成)</strong> :
+微調螺絲內部的齒輪與螺紋之間存在不可避免的物理空隙。如果在旋轉螺絲時施力不均，或者曾經出現「來回轉動」的情況，讀數表上的位移量
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\Delta d</annotation></semantics></math>
+已經改變，但實際上動鏡卻因為齒輪空轉而尚未移動，導致代入公式計算的
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\Delta d</annotation></semantics></math>
+大於實際光程變化。</p></li>
+<li><p><strong>How (可以量化嗎)</strong> :
+若我們在不動鏡片的前提下，順時針轉動螺絲至感覺到阻力，再逆時針轉動至感覺到阻力，這兩點之間的刻度差即為背隙造成的最大位移誤差量
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\delta d</annotation></semantics></math>。</p></li>
+<li><p><strong>如何改進</strong> :
+嚴格維持「單向、等速」旋轉微調螺絲。若不小心轉過頭，嚴禁直接倒轉退回，必須反向退回數圈後，再次順向重新逼近目標刻度。</p></li>
+</ul></li>
+</ol>
+<h2 id="未知透明塊折射率">未知透明塊折射率</h2>
+<h3 class="unnumbered" id="實驗參數與初始條件">實驗參數與初始條件</h3>
+<ul>
+<li><p>透明塊厚度t=2.05(mm)</p></li>
+<li><p>雷射光波長
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
+= 678.78(nm)</p></li>
+<li><p>透明塊折射率n= 1.46 (cm)</p></li>
+</ul>
+<div id="實驗b data">
+<table>
+<caption><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>
+m vs.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\cos{\theta}</annotation></semantics></math>
+diagram</caption>
+<thead>
+<tr>
+<th
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">\Delta m</annotation></semantics></math></th>
+<th
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\cos{\theta}</annotation></semantics></math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.9997</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.9990</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.9986</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0.9981</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.9976</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="折射率ref">
+<table>
+<caption>折射率列表</caption>
+<tbody>
+<tr>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1.00029</td>
+<td style="text-align: center;">1.33</td>
+<td style="text-align: center;">1.46</td>
+<td style="text-align: center;">1.49</td>
+<td style="text-align: center;">1.52</td>
+<td style="text-align: center;">1.69</td>
+<td style="text-align: center;">2.42</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p><strong>數據結果</strong> : 由<a href="#實驗b公式"
+data-reference-type="eqref"
+data-reference="實驗b公式">[實驗b公式]</a>，我們可以求出
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mrow><mi>實</mi><mi>際</mi></mrow></msub><annotation encoding="application/x-tex">n_{實際}</annotation></semantics></math>
+= 1.462。所以:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Error</mtext><mo>=</mo><mn>2</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\begin{equation*}
+                                          \text{Error} = 2\%
+\end{equation*}</annotation></semantics></math></p></li>
+<li><p><strong>誤差分析</strong> :
+此誤差已經算很精準了，以下我討論受限於儀器與操作的
+物理極限所造成的誤差:</p>
+<h3 id="旋轉台游標尺讀數之解析度限制">旋轉台游標尺讀數之解析度限制</h3>
+<ul>
+<li><p><strong>What (誤差分類)</strong> : 儀器/隨機誤差。</p></li>
+<li><p><strong>Why (如何造成)</strong> : 由於旋轉台游標尺最小單位的限制
+當干涉條紋移動整數倍的時候，操作者必須馬上讀取游標尺的讀數，由於眼睛對齊游標尺刻度線會產生視差，且角度讀數本身具有讀數不確定度，這會直接造成代入公式的
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>
+值產生浮動。</p></li>
+<li><p><strong>How (可以量化嗎)</strong> : 可以透過重複多次觀察來算平均
+波長藉此來評斷誤差值的離散程 度。</p></li>
+<li><p><strong>如何改進</strong> :
+讀取游標尺時應配戴放大鏡，並確保視線垂直於刻度面以消除視差。</p></li>
+</ul></li>
+</ol>
+<h1 id="問題與討論">問題與討論</h1>
+<ol>
+<li><p><strong>分光鏡的原理為何？該如何判斷分光鏡上的鍍膜面？試說明。</strong><br />
+答：分光鏡通常是由一片平行的玻璃板，在其其中一面鍍上特定的半反射介電質薄膜或金屬膜（如半鍍銀）所構成。當雷射光入射時，鍍膜面能將光波的振幅分為兩半，一半反射、一半透射，達到分光的效果。<br />
+要判斷鍍膜面在哪一側，最簡便且實用的方式為<strong>「筆尖測試法」</strong>：將一枝筆尖或指尖輕觸分光鏡表面，並從側面觀察其反射影像。若筆尖與其反射影像「緊密相連」沒有縫隙，代表該面即為鍍膜面（光線在第一面就直接反射）；若筆尖與影像之間有一段透明的間隙（即玻璃本身的厚度），則代表該面為未鍍膜的玻璃面。</p></li>
+<li><p><strong>麥克森干涉儀可應用在那些地方？試說明。</strong><br />
+答：麥克森干涉儀因其對光程差極度敏感，能進行次波長等級的測量，廣泛應用於以下領域：</p>
+<ul>
+<li><p><strong>精密位移與厚度量測：</strong>
+可精確測量壓電陶瓷的微小膨脹，或量測透明薄膜（如半導體製程中的氧化層、奈米材料）的厚度與折射率。</p></li>
+<li><p><strong>傅立葉轉換紅外光譜儀 (FTIR)：</strong>
+在化學與材料科學中，利用干涉圖轉化為光譜，用於分析分子結構與化學鍵的吸收特徵。</p></li>
+<li><p><strong>重力波探測：</strong>
+這是最著名的現代物理應用，例如雷射干涉重力波天文台
+(LIGO)。當重力波穿過地球造成微小的時空扭曲時，干涉儀兩臂長達數公里的光程會產生極微小變化，進而使干涉條紋發生移動，藉此證實廣義相對論的預言。</p></li>
+</ul></li>
+<li><p><strong>實驗方式若改為不轉動透明塊，而是改變動鏡與透明塊的相對位置，是否仍可求得透明塊折射率？試說明。</strong><br />
+答：<strong>無法求得。</strong><br />
+光程的定義為幾何路徑長與介質折射率的乘積。若光束始終「垂直入射」透明塊，光在透明塊中行經的距離固定為其厚度
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>。當我們只沿著光軸方向平移透明塊，光束穿過透明塊的「總厚度」與「折射角度」完全沒有改變。<br />
+換言之，引入該透明塊所造成的額外光程差
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>L</mi><mo>=</mo><mn>2</mn><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Delta L = 2d(n - 1)</annotation></semantics></math>
+是一個不隨位置改變的常數。因為光程差沒有發生「動態變化」，屏幕上的干涉條紋就不會產生移動（吞吐），我們也就無法透過計數條紋
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+來反推折射率
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>。</p></li>
+<li><p><strong>是否可利用麥克森干涉儀求得一大氣壓下空氣的折射率？試說明。</strong><br />
+答：<strong>可以。</strong><br />
+具體作法為：在干涉儀的其中一臂光路上，放入一個長度為
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>、兩端帶有透明玻璃窗的密閉氣室。首先將氣室內部抽成真空（此時內部折射率
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≈</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n \approx 1</annotation></semantics></math>），接著緩慢打開微調閥門，讓外界一大氣壓的空氣逐漸漏入氣室中。<br />
+隨著氣室內空氣密度增加，折射率會從
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+逐漸上升至
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mtext mathvariant="normal">air</mtext></msub><annotation encoding="application/x-tex">n_{\text{air}}</annotation></semantics></math>，產生光程差的改變。藉由觀察並計算漏氣過程中干涉條紋移動的總數
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>，並代入公式
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>d</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mtext mathvariant="normal">air</mtext></msub><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>N</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">2d(n_{\text{air}} - 1) = N\lambda</annotation></semantics></math>，即可極為精確地求得一大氣壓下空氣的折射率。</p></li>
+</ol>
+<h1 id="心得">心得</h1>
+<p>本次實驗進行的相對順利，除了一開始我們在使反射光重和的步驟當中忘記先將擴束鏡取下。此外，
+我個人認為僅透過肉眼實在不是非常可靠，畢竟干涉條紋移動的速度實在是太快了不管是改變角度
+觀察條紋移動數亦或者是該便動靜看條紋移動數多多少少都會有些許誤差，所幸做出來的結果還算準
+確。</p>
+<div class="thebibliography">
+<p><span>99</span></p>
+<p>國立陽明交通大學物理實驗
+(2026)。<em>大學物理實驗手冊（下冊）</em>。新竹市：國立陽明交通大學。</p>
+</div>
+</body>
+</html>
