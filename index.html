@@ -307,129 +307,126 @@
 
     #fallback-msg a:hover { background: var(--accent); color: #fff; }
 
-    /* ── 星空 Hero ── */
-    .star-hero {
+    /* ── Hero Slider ── */
+    .hero-slider {
       position: relative;
       width: 100%;
-      height: 220px;
+      height: 300px;
       background: #05091a;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
       flex-shrink: 0;
     }
 
-    .stars1, .stars2, .stars3 {
+    /* 每張 slide：背景圖片 + 文字 */
+    .slide {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      animation: drift linear infinite;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 52px 52px;
     }
 
-    .stars1 {
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 55%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 40% 10%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 55% 75%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 70% 30%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 85% 65%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 92% 15%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 5%  88%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 33% 40%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 63% 90%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 78% 50%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 18% 72%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 48% 35%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 88% 82%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 3%  45%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 97% 38%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 15% 5%,  #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 58%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 38% 92%, #fff 0%, transparent 100%),
-        radial-gradient(1px 1px at 72% 7%,  #fff 0%, transparent 100%);
-      opacity: 0.7;
-      animation-duration: 120s;
-    }
+    .slide.active { opacity: 1; }
 
-    .stars2 {
-      background-image:
-        radial-gradient(1.5px 1.5px at 20% 35%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 45% 80%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 65% 18%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 82% 55%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 8%  60%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 30% 8%,  #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 55% 45%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 90% 28%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 12% 90%, #cce0ff 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 75% 72%, #cce0ff 0%, transparent 100%);
-      opacity: 0.5;
-      animation-duration: 80s;
-      animation-direction: reverse;
-    }
-
-    .stars3 {
-      background-image:
-        radial-gradient(2px 2px at 35% 25%, #fff 0%, transparent 100%),
-        radial-gradient(2px 2px at 70% 60%, #fff 0%, transparent 100%),
-        radial-gradient(2px 2px at 15% 50%, #a8c8ff 0%, transparent 100%),
-        radial-gradient(2px 2px at 85% 10%, #fff 0%, transparent 100%),
-        radial-gradient(2px 2px at 50% 85%, #a8c8ff 0%, transparent 100%),
-        radial-gradient(2.5px 2.5px at 25% 70%, #fff 0%, transparent 100%),
-        radial-gradient(2.5px 2.5px at 80% 40%, #a8c8ff 0%, transparent 100%);
-      opacity: 0.9;
-      animation-duration: 200s;
-    }
-
-    @keyframes drift {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50px); }
-    }
-
-    .star-hero::before {
+    /* 左側深色漸層：讓文字清晰 */
+    .slide::before {
       content: '';
       position: absolute;
-      width: 60%; height: 80%;
-      top: 10%; left: 20%;
-      background: radial-gradient(ellipse at center,
-        rgba(58,123,213,0.12) 0%,
-        rgba(100,60,200,0.06) 50%,
-        transparent 70%);
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(5, 9, 26, 0.82) 0%,
+        rgba(5, 9, 26, 0.55) 55%,
+        rgba(5, 9, 26, 0.15) 100%
+      );
       pointer-events: none;
     }
 
-    .star-hero::after {
+    /* 底部漸層過渡到頁面背景 */
+    .slide::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 60px;
+      height: 70px;
       background: linear-gradient(to bottom, transparent, #f4f6fb);
       pointer-events: none;
     }
 
-    .hero-name {
-      position: relative; z-index: 10;
-      font-size: 30px; font-weight: 700;
-      color: #fff; letter-spacing: -0.5px;
-      text-shadow: 0 0 30px rgba(100,160,255,0.6);
+    .slide-content {
+      position: relative;
+      z-index: 2;
     }
 
-    .hero-divider {
-      position: relative; z-index: 10;
-      width: 40px; height: 1px;
-      background: rgba(100,160,255,0.5);
-      margin: 4px 0;
+    .slide-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(140, 200, 255, 0.9);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .hero-sub {
-      position: relative; z-index: 10;
+    .slide-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      letter-spacing: -0.3px;
+      max-width: 520px;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 12px rgba(0,0,30,0.5);
+    }
+
+    .slide-desc {
+      font-size: 13px;
+      color: rgba(200, 220, 255, 0.82);
+      line-height: 1.8;
+      max-width: 460px;
+    }
+
+    /* 右下角控制列 */
+    .slider-controls {
+      position: absolute;
+      bottom: 16px; right: 20px;
+      display: flex; align-items: center; gap: 8px;
+      z-index: 10;
+    }
+
+    .ctrl-btn {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 4px; color: #fff;
+      font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .ctrl-btn:hover { background: rgba(255,255,255,0.28); }
+
+    .slide-counter {
       font-size: 12px;
-      color: rgba(180,210,255,0.85);
-      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.7);
+      min-width: 48px; text-align: center;
+      letter-spacing: 1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 底部進度條 */
+    .progress-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0.8;
+      z-index: 10;
+      width: 0%;
     }
 
     /* ── CV 樣式 ── */
@@ -678,11 +675,10 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" data-pdf="./reports/Electrodynamics_note_ver1.pdf"
-           onclick="openPDF(event, this, '電磁波')">電磁波</a>
-        <a class="note-link" data-pdf="./reports/Electrodynamics_note_ver1.pdf"
-           onclick="openPDF(event, this, 'RLGC模型')">RLGC模型</a>
-        
+        <a class="note-link" href="#" onclick="openLink(event, this)">庫倫定律與電場</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">高斯定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">磁場與安培定律</a>
+        <a class="note-link" href="#" onclick="openLink(event, this)">馬克士威方程組</a>
       </div>
     </div>
 
@@ -752,14 +748,54 @@
   <!-- CV 檢視（預設顯示） -->
   <div id="cv-view">
 
-    <!-- ★ 星空 Hero -->
-    <div class="star-hero">
-      <div class="stars1"></div>
-      <div class="stars2"></div>
-      <div class="stars3"></div>
-      <div class="hero-name">ray</div>
-      <div class="hero-divider"></div>
-      <div class="hero-sub">電子物理學系・國立陽明交通大學</div>
+    <!-- ★ Hero Slider -->
+    <div class="hero-slider">
+
+      <!-- Slide 1：關於我 -->
+      <div class="slide active" style="background-image: url('./slides/slide01.jpg');">
+        <div class="slide-content">
+          <div class="slide-tag">關於我</div>
+          <div class="slide-title">ray</div>
+          <div class="slide-desc">電子物理學系，陽明交通大學</div>
+        </div>
+      </div>
+
+      <!-- Slide 2：筆記 -->
+      <div class="slide" style="background-image: url('./slides/slide02.jpg');">
+        <div class="slide-content">
+          <div class="slide-tag">筆記</div>
+          <div class="slide-title">筆記的集散地</div>
+          <div class="slide-desc">上課的一些學習痕跡，提供 PDF 檔供各位參考</div>
+        </div>
+      </div>
+
+      <!-- Slide 3：學習 -->
+      <div class="slide" style="background-image: url('./slides/slide03.jpg');">
+        <div class="slide-content">
+          <div class="slide-tag">學習</div>
+          <div class="slide-title">學習是把每一步都搞清楚後才繼續往前</div>
+        </div>
+      </div>
+
+      <!-- Slide 4：隨筆 -->
+      <div class="slide" style="background-image: url('./slides/slide04.jpg');">
+        <div class="slide-content">
+          <div class="slide-tag">隨筆</div>
+          <div class="slide-title">未知的宇宙</div>
+          <div class="slide-desc">百年前廣義相對論與量子力學的確立，將人類的文明推向另一個維度。然而，當人類滿懷信心地將這些理論推向無垠深空時，赫然發現對宇宙的了解遠遠不足。</div>
+        </div>
+      </div>
+
+      <!-- 進度條 -->
+      <div class="progress-bar" id="progress-bar"></div>
+
+      <!-- 控制列 -->
+      <div class="slider-controls">
+        <button class="ctrl-btn" id="prev-btn">&#8249;</button>
+        <span class="slide-counter" id="slide-counter">01 / 04</span>
+        <button class="ctrl-btn" id="next-btn">&#8250;</button>
+      </div>
+
     </div>
 
     <!-- CV 內容（有 padding 的內層包裝） -->
@@ -1002,6 +1038,51 @@
       }
     });
   }
+
+  /* ── Hero Slider ── */
+  (function() {
+    const slides  = document.querySelectorAll('.slide');
+    const counter = document.getElementById('slide-counter');
+    const bar     = document.getElementById('progress-bar');
+    const total   = slides.length;
+    let current   = 0;
+    let rafId     = null;
+    let startTime = null;
+    const INTERVAL = 6000;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      current = ((idx % total) + total) % total;
+      slides[current].classList.add('active');
+      counter.textContent =
+        String(current + 1).padStart(2, '0') + ' / ' +
+        String(total).padStart(2, '0');
+      startProgress();
+    }
+
+    function startProgress() {
+      cancelAnimationFrame(rafId);
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      startTime = performance.now();
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function tick(now) {
+      const pct = Math.min((now - startTime) / INTERVAL * 100, 100);
+      bar.style.width = pct + '%';
+      if (pct < 100) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        goTo(current + 1);
+      }
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next-btn').addEventListener('click', () => goTo(current + 1));
+
+    startProgress();
+  })();
 </script>
 
 </body>
