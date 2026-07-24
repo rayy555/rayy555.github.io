@@ -188,16 +188,22 @@
       overflow: hidden;
     }
 
+    /* padding 移除，改在 .cv-inner 處理，讓星空 Hero 可以全寬 */
     #cv-view {
       flex: 1;
       overflow-y: auto;
-      padding: 40px 56px;
+      padding: 0;
       scrollbar-width: thin;
       scrollbar-color: #d0d8ea transparent;
     }
 
     #cv-view::-webkit-scrollbar { width: 6px; }
     #cv-view::-webkit-scrollbar-thumb { background: #d0d8ea; border-radius: 4px; }
+
+    /* CV 內容區的間距（Hero 之後） */
+    .cv-inner {
+      padding: 28px 56px 40px;
+    }
 
     #content-view {
       flex: 1;
@@ -300,138 +306,133 @@
     }
 
     #fallback-msg a:hover { background: var(--accent); color: #fff; }
-    
-
-
-
 
     /* ── 星空 Hero ── */
-.star-hero {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  background: #05091a;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
+    .star-hero {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: #05091a;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
 
-.stars1, .stars2, .stars3 {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  animation: drift linear infinite;
-}
+    .stars1, .stars2, .stars3 {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      animation: drift linear infinite;
+    }
 
-.stars1 {
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 55%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 40% 10%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 55% 75%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 30%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 85% 65%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 92% 15%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 5%  88%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 33% 40%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 63% 90%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 78% 50%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 18% 72%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 48% 35%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 88% 82%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 3%  45%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 97% 38%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 15% 5%,  #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 58%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 38% 92%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 72% 7%,  #fff 0%, transparent 100%);
-  opacity: 0.7;
-  animation-duration: 120s;
-}
+    .stars1 {
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 55%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 10%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 75%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 30%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 65%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 92% 15%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 5%  88%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 33% 40%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 63% 90%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 50%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 18% 72%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 48% 35%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 82%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 3%  45%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 97% 38%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 5%,  #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 58%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 92%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 7%,  #fff 0%, transparent 100%);
+      opacity: 0.7;
+      animation-duration: 120s;
+    }
 
-.stars2 {
-  background-image:
-    radial-gradient(1.5px 1.5px at 20% 35%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 45% 80%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 65% 18%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 82% 55%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 8%  60%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 30% 8%,  #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 55% 45%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 90% 28%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 12% 90%, #cce0ff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 75% 72%, #cce0ff 0%, transparent 100%);
-  opacity: 0.5;
-  animation-duration: 80s;
-  animation-direction: reverse;
-}
+    .stars2 {
+      background-image:
+        radial-gradient(1.5px 1.5px at 20% 35%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 45% 80%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 65% 18%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 82% 55%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 8%  60%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 30% 8%,  #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 45%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 90% 28%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 12% 90%, #cce0ff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 75% 72%, #cce0ff 0%, transparent 100%);
+      opacity: 0.5;
+      animation-duration: 80s;
+      animation-direction: reverse;
+    }
 
-.stars3 {
-  background-image:
-    radial-gradient(2px 2px at 35% 25%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 70% 60%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 15% 50%, #a8c8ff 0%, transparent 100%),
-    radial-gradient(2px 2px at 85% 10%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 50% 85%, #a8c8ff 0%, transparent 100%),
-    radial-gradient(2.5px 2.5px at 25% 70%, #fff 0%, transparent 100%),
-    radial-gradient(2.5px 2.5px at 80% 40%, #a8c8ff 0%, transparent 100%);
-  opacity: 0.9;
-  animation-duration: 200s;
-}
+    .stars3 {
+      background-image:
+        radial-gradient(2px 2px at 35% 25%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 70% 60%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 15% 50%, #a8c8ff 0%, transparent 100%),
+        radial-gradient(2px 2px at 85% 10%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 50% 85%, #a8c8ff 0%, transparent 100%),
+        radial-gradient(2.5px 2.5px at 25% 70%, #fff 0%, transparent 100%),
+        radial-gradient(2.5px 2.5px at 80% 40%, #a8c8ff 0%, transparent 100%);
+      opacity: 0.9;
+      animation-duration: 200s;
+    }
 
-@keyframes drift {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50px); }
-}
+    @keyframes drift {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50px); }
+    }
 
-.star-hero::before {
-  content: '';
-  position: absolute;
-  width: 60%; height: 80%;
-  top: 10%; left: 20%;
-  background: radial-gradient(ellipse at center,
-    rgba(58,123,213,0.12) 0%,
-    rgba(100,60,200,0.06) 50%,
-    transparent 70%);
-  pointer-events: none;
-}
+    .star-hero::before {
+      content: '';
+      position: absolute;
+      width: 60%; height: 80%;
+      top: 10%; left: 20%;
+      background: radial-gradient(ellipse at center,
+        rgba(58,123,213,0.12) 0%,
+        rgba(100,60,200,0.06) 50%,
+        transparent 70%);
+      pointer-events: none;
+    }
 
-.star-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60px;
-  background: linear-gradient(to bottom, transparent, #f4f6fb);
-  pointer-events: none;
-}
+    .star-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, #f4f6fb);
+      pointer-events: none;
+    }
 
-.hero-name {
-  position: relative; z-index: 10;
-  font-size: 30px; font-weight: 700;
-  color: #fff; letter-spacing: -0.5px;
-  text-shadow: 0 0 30px rgba(100,160,255,0.6);
-}
+    .hero-name {
+      position: relative; z-index: 10;
+      font-size: 30px; font-weight: 700;
+      color: #fff; letter-spacing: -0.5px;
+      text-shadow: 0 0 30px rgba(100,160,255,0.6);
+    }
 
-.hero-divider {
-  position: relative; z-index: 10;
-  width: 40px; height: 1px;
-  background: rgba(100,160,255,0.5);
-  margin: 4px 0;
-}
+    .hero-divider {
+      position: relative; z-index: 10;
+      width: 40px; height: 1px;
+      background: rgba(100,160,255,0.5);
+      margin: 4px 0;
+    }
 
-.hero-sub {
-  position: relative; z-index: 10;
-  font-size: 12px;
-  color: rgba(180,210,255,0.85);
-  letter-spacing: 0.5px;
-}
+    .hero-sub {
+      position: relative; z-index: 10;
+      font-size: 12px;
+      color: rgba(180,210,255,0.85);
+      letter-spacing: 0.5px;
+    }
+
     /* ── CV 樣式 ── */
-
-
     .cv-card {
       background: #fff;
       border: 1px solid var(--border);
@@ -626,7 +627,7 @@
       .main-layout { flex-direction: column; overflow: auto; height: auto; }
       .left-panel { width: 100%; height: auto; min-width: unset; }
       .notes-list { max-height: 40vh; }
-      #cv-view { padding: 24px 16px; }
+      .cv-inner { padding: 24px 16px; }
       .cv-card { padding: 24px 20px; }
       .cv-layout { flex-direction: column; }
       .cv-right { width: 100%; }
@@ -677,10 +678,11 @@
         <span class="category-arrow">▶</span>
       </div>
       <div class="category-items">
-        <a class="note-link" href="#" onclick="openLink(event, this)">庫倫定律與電場</a>
-        <a class="note-link" href="#" onclick="openLink(event, this)">高斯定律</a>
-        <a class="note-link" href="#" onclick="openLink(event, this)">磁場與安培定律</a>
-        <a class="note-link" href="#" onclick="openLink(event, this)">馬克士威方程組</a>
+        <a class="note-link" data-pdf="./reports/Electrodynamics_note_ver1.pdf"
+           onclick="openPDF(event, this, '電磁波')">電磁波</a>
+        <a class="note-link" data-pdf="./reports/Electrodynamics_note_ver1.pdf"
+           onclick="openPDF(event, this, 'RLGC模型')">RLGC模型</a>
+        
       </div>
     </div>
 
@@ -749,6 +751,19 @@
 
   <!-- CV 檢視（預設顯示） -->
   <div id="cv-view">
+
+    <!-- ★ 星空 Hero -->
+    <div class="star-hero">
+      <div class="stars1"></div>
+      <div class="stars2"></div>
+      <div class="stars3"></div>
+      <div class="hero-name">ray</div>
+      <div class="hero-divider"></div>
+      <div class="hero-sub">電子物理學系・國立陽明交通大學</div>
+    </div>
+
+    <!-- CV 內容（有 padding 的內層包裝） -->
+    <div class="cv-inner">
     <div class="cv-layout">
     <div class="cv-left">
     <div class="cv-card">
@@ -821,10 +836,9 @@
     <!-- 右欄 -->
     <div class="cv-right">
 
-      <!-- 上方：圖片區（可替換成任何照片） -->
+      <!-- 上方：圖片區 -->
       <div class="photo-card">
-        <img src="./image/Tesla.jpg"
-             alt="Nikola Tesla" />
+        <img src="./image/Tesla.jpg" alt="Nikola Tesla" />
         <div class="photo-caption">Nikola Tesla &nbsp;|&nbsp; 1856 – 1943</div>
       </div>
 
@@ -864,6 +878,7 @@
 
     </div><!-- end cv-right -->
     </div><!-- end cv-layout -->
+    </div><!-- end cv-inner -->
   </div>
 
   <!-- 筆記 / PDF 檢視 -->
